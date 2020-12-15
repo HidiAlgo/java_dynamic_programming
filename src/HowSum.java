@@ -40,9 +40,10 @@ public class HowSum {
                 Integer remainder = targetSum - num;
                 List<Integer> remainderResult = howSum2.apply(remainder, n).apply(memo);
                 if(remainderResult != null){
-                    remainderResult.add(num);
-                    memo.put(targetSum,remainderResult);
-                    return remainderResult;
+                    List<Integer> out = new ArrayList<>(remainderResult);
+                    out.add(num);
+                    memo.put(targetSum,out);
+                    return out;
                 }
             }
             memo.put(targetSum, null);
@@ -50,8 +51,8 @@ public class HowSum {
         };
 
 //        System.out.println(howSum1.apply(300, Arrays.asList(7,14)));
-        System.out.println(howSum2.apply(300, Arrays.asList(7,14)).apply(new HashMap<>()));
-        System.out.println(howSum2_method(300, Arrays.asList(7,14),new HashMap<>()));
+        System.out.println(howSum2.apply(100, Arrays.asList(7,14,5)).apply(new HashMap<>()));
+        System.out.println(howSum2_method(100, Arrays.asList(7,14,5),new HashMap<>()));
     }
 
     //If you make your self difficult to understand the howSum2_method lambda expression, then try out this method
@@ -65,9 +66,10 @@ public class HowSum {
             Integer remainder = targetSum - num;
             List<Integer> remainderResult = howSum2_method(remainder, n, memo);
             if(remainderResult != null){
-                remainderResult.add(num);
-                memo.put(targetSum,remainderResult);
-                return remainderResult;
+                List<Integer> out = new ArrayList<>(remainderResult);
+                out.add(num);
+                memo.put(targetSum,out);
+                return out;
             }
         }
         memo.put(targetSum, null);
